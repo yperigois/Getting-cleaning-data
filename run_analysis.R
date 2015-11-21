@@ -1,3 +1,6 @@
+
+run<-function()
+{  
 library(data.table)
 library(dplyr)
 xx<-read.csv("./test/X_test.txt", sep = "")
@@ -28,5 +31,7 @@ k_all<-k_all[,c(2, 1, 82,c(3:81))]
 grp<-group_by(k_all, subject.V1,`Activity Name`)
 h<-summarise_each(grp, funs(mean), c(4:82))
 h<-data.table(h)
-write.table(h, file="Project result.txt",row.name=FALSE )
+print(h)
+}
 
+write.table(h, file="Project result.txt",row.name=FALSE )
