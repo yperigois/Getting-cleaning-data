@@ -1,6 +1,19 @@
 # Getting-cleaning-data
 
+   1- Merges the training and the test sets to create one data set
+   
+   2- Extracts only the measurements on the mean and standard deviation for each measurement. 
+   
+   3- Uses descriptive activity names to name the activities in the data set
+   
+   4-Appropriately labels the data set with descriptive variable names. 
+   
+   5-From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+
+
 ##How the script is working:
+  Run() function will genertae the dity data set described above
+  
   Loading "data.table" and "dplyr" packages
   
   Reading and loading raw data with fread fonction:
@@ -15,35 +28,36 @@
  
   	-k_subject: global dataset for subject variable (Id of person doing the test: 1:30)
   
-  Read and load the features file to list all the items that are recorded in the X files
+  Read and load the "Features" file to list all the items that are recorded in the X files
   
-  Adding to k_xx the column names loaded from Features
+  Rename column names of k_xx with corresponding names loaded from Features
   
   From Features extract only those that contain "mean" and "std"
   
   In k_xx, keep columns that contain "mean" and "std" in their name
   
-  Create one table "k_all" with subject identification, activity identification, all records including mean and std features
+  Create one table "k_all" with subject identification, activity identification, all records that include mean and std features
   
   Loading the activity labels and  adding to k_all a new column called "Activity Name" with activity label corresponding to activity identification
   
   Keeping columns in the following order: "subject", "activity Name", and columns containing "mean" or "std"
 
-  Group the table by subject and Acivity Name
+  k_all transformed as data.frame=>"Activity Name" is renamed Acivity.Name
   
-  With simmarise_each function, calculate the mean of the features grouped by subject and "Activity Name"
+  Group the table by "subject.V1" and "Activity.Name"
+  
+  With summarise_each function, calculate the mean of the features grouped by "subject.V1" and "Activity.Name"
   
   
 ##Codebook
   
   subject.V1: subject identification-integer 1..30
   
-  Activity Name: Name of activity of subject: LAYING, SITTING, STANDING, WALKING, WALKING_DOWNSTAIRS, WALKING_UPSTAIRS
+  Activity.Name: Name of activity of subject: LAYING, SITTING, STANDING, WALKING, WALKING_DOWNSTAIRS, WALKING_UPSTAIRS
   
   Mean of each of the following features (containing either "mean" or "std" in their name)
   
     "tBodyAcc.mean...X"
-    
     "tBodyAcc.mean...Y"
     "tBodyAcc.mean...Z"
     "tBodyAcc.std...X"
