@@ -45,15 +45,17 @@ ractivity<-function(k) {activity[k,]$"Activity Name"}
 k_all<-mutate(k_all, "Activity Name"=ractivity(move.V1))
 
 k_all<-data.frame(k_all)
+#"Activity Name" is renamed Activity.Name
 
-#Keeping columns in the following order: "subject", "activity Name", and columns containing "mean" or "std"
+
+#Keeping columns in the following order: "subject.V1", "Activity.Name", and columns containing "mean" or "std"
 k_all<-k_all[,c(2, 1, 82,c(3:81))]
 
-#Group the table by subject and Acivity Name
+#Group the table by subject and Acivity.Name
 
 grp<-group_by(k_all, subject.V1,Activity.Name)
 
-#Calculate the mean of the features grouped by subject and "Activity Name"
+#Calculate the mean of the features grouped by "subject.V1" and "Activity Name"
 
 h<-summarise_each(grp, funs(mean), c(4:82))
 
@@ -63,6 +65,6 @@ return(h)
 }
 
 res<-run()
-write.table(res, file="Project result 2.txt",row.name=FALSE )
+write.table(res, file="Project result.txt",row.name=FALSE )
 
 
